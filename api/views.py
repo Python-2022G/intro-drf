@@ -6,10 +6,20 @@ from rest_framework.request import Request
 @api_view(['GET', 'POST'])
 def hello_world(request: Request, name: str=None) -> Response:
     if request.method == 'GET':
-        if name:
-            data = {"message": f"hello, {name}"}
-        else:
-            data = {"message": "hello, world"}
+        # get query parameters from request
+        params = request.query_params
 
-        return Response(data=data)
+        name = params.get('name')
 
+    if request.method == 'POST':
+        # get data from request
+        data = request.data
+
+        name = data.get('name')
+
+    if name:
+        data = {"message": f"hello, {name}"}
+    else:
+        data = {"message": "hello, world"}
+
+    return Response(data)
