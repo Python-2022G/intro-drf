@@ -4,12 +4,8 @@ from rest_framework.request import Request
 
 
 @api_view(['GET', 'POST'])
-def hello_world(request: Request) -> Response:
+def hello_world(request: Request, name: str=None) -> Response:
     if request.method == 'GET':
-        # get query parameters from request
-        params = request.query_params
-
-        name = params.get('name')
         if name:
             data = {"message": f"hello, {name}"}
         else:
