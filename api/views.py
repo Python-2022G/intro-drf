@@ -1,6 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.request import Request
+from rest_framework import status
 
 
 @api_view(['GET', 'POST'])
@@ -22,4 +23,4 @@ def hello_world(request: Request, name: str=None) -> Response:
     else:
         data = {"message": "hello, world"}
 
-    return Response(data)
+    return Response(data=data, status=status.HTTP_200_OK)
